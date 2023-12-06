@@ -24,8 +24,6 @@ export class DropRolling extends CharacterStateBase implements ICharacterState
 	{
 		super.update(timeStep);
 
-		this.character.setCameraRelativeOrientationTarget();
-
 		if (this.animationEnded(timeStep))
 		{
 			if (this.anyDirection())

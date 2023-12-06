@@ -61,17 +61,6 @@ export abstract class CharacterStateBase implements ICharacterState
 		{
 			this.character.findVehicleToEnter(false);
 		}
-		else if (this.canEnterVehicles && this.character.vehicleEntryInstance !== null)
-		{
-			if (this.character.actions.up.justPressed ||
-				this.character.actions.down.justPressed ||
-				this.character.actions.left.justPressed ||
-				this.character.actions.right.justPressed)
-				{
-					this.character.vehicleEntryInstance = null;
-					this.character.actions.up.isPressed = false;
-				}
-		}
 	}
 
 	public noDirection(): boolean

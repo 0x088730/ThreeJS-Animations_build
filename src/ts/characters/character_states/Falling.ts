@@ -24,7 +24,6 @@ export class Falling extends CharacterStateBase implements ICharacterState
 	{
 		super.update(timeStep);
 
-		this.character.setCameraRelativeOrientationTarget();
 		this.character.setArcadeVelocityTarget(this.anyDirection() ? 0.8 : 0);
 
 		if (this.character.rayHasHit)

@@ -23,7 +23,7 @@ export class DropRunning extends CharacterStateBase implements ICharacterState
 	{
 		super.update(timeStep);
 
-		this.character.setCameraRelativeOrientationTarget();
+		// this.character.setCameraRelativeOrientationTarget();
 
 		if (this.animationEnded(timeStep))
 		{

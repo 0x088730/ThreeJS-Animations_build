@@ -35,7 +35,7 @@ export class StartWalkBase extends CharacterStateBase
 			this.character.setState(new Walk(this.character));
 		}
 
-		this.character.setCameraRelativeOrientationTarget();
+		// this.character.setCameraRelativeOrientationTarget();
 
 		//
 		// Different velocity treating experiments

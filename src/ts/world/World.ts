@@ -29,7 +29,6 @@ import { BoxCollider } from '../physics/colliders/BoxCollider';
 import { TrimeshCollider } from '../physics/colliders/TrimeshCollider';
 import { Scenario } from './Scenario';
 import { Sky } from './Sky';
-import { Ocean } from './Ocean';
 
 export class World
 {
@@ -311,11 +310,6 @@ export class World
 				{
 					Utils.setupMeshProperties(child);
 					this.sky.csm.setupMaterial(child.material);
-
-					if (child.material.name === 'ocean')
-					{
-						this.registerUpdatable(new Ocean(child, this));
-					}
 				}
 
 				if (child.userData.hasOwnProperty('data'))

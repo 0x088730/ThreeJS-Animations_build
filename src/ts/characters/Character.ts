@@ -14,11 +14,7 @@ import { ICharacterState } from '../interfaces/ICharacterState';
 import { IWorldEntity } from '../interfaces/IWorldEntity';
 import { CollisionGroups } from '../enums/CollisionGroups';
 import { CapsuleCollider } from '../physics/colliders/CapsuleCollider';
-import { VehicleEntryInstance } from './VehicleEntryInstance';
-import { SeatType } from '../enums/SeatType';
 import { GroundImpactData } from './GroundImpactData';
-import { ClosestObjectFinder } from '../core/ClosestObjectFinder';
-import { Object3D } from 'three';
 import { EntityType } from '../enums/EntityType';
 
 export class Character extends THREE.Object3D implements IWorldEntity
@@ -70,8 +66,6 @@ export class Character extends THREE.Object3D implements IWorldEntity
 	
 	// Vehicles
 	public controlledObject: IControllable;
-	// public occupyingSeat: VehicleSeat = null;
-	public vehicleEntryInstance: VehicleEntryInstance = null;
 	
 	private physicsEnabled: boolean = true;
 
@@ -399,17 +393,11 @@ export class Character extends THREE.Object3D implements IWorldEntity
 	public update(timeStep: number): void
 	{
 		this.behaviour?.update(timeStep);
-		this.vehicleEntryInstance?.update(timeStep);
-		// console.log(this.occupyingSeat);
 		this.charState?.update(timeStep);
-
-		// this.visuals.position.copy(this.modelOffset);
 		if (this.physicsEnabled) this.springMovement(timeStep);
 		if (this.physicsEnabled) this.springRotation(timeStep);
 		if (this.physicsEnabled) this.rotateModel();
 		if (this.mixer !== undefined) this.mixer.update(timeStep);
-
-		// Sync physics/graphics
 		if (this.physicsEnabled)
 		{
 			this.position.set(
@@ -439,7 +427,6 @@ export class Character extends THREE.Object3D implements IWorldEntity
 
 		this.world.cameraOperator.setRadius(1.6, true);
 		this.world.cameraOperator.followMode = false;
-		// this.world.dirLight.target = this;
 
 		this.displayControls();
 	}
@@ -556,22 +543,9 @@ export class Character extends THREE.Object3D implements IWorldEntity
 		return Utils.appplyVectorMatrixXZ(flatViewVector, localDirection);
 	}
 
-	public setCameraRelativeOrientationTarget(): void
-	{
-		if (this.vehicleEntryInstance === null)
-		{
-			let moveVector = this.getCameraRelativeMovementVector();
-	
-			if (moveVector.x === 0 && moveVector.y === 0 && moveVector.z === 0)
-			{
-				this.setOrientation(this.orientation);
-			}
-			else
-			{
-				this.setOrientation(moveVector);
-			}
-		}
-	}
+	// public setCameraRelativeOrientationTarget(): void
+	// {
+	// }
 
 	public rotateModel(): void
 	{
